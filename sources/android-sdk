@@ -1,0 +1,30 @@
+
+function SOURCE_GET_TEST_CMD {
+    which android &> /dev/null
+    #TODO && which adb 
+}
+
+function SOURCE_GET_VERSION {
+    # could not get android version
+    SOURCE_VERSION="?"
+}
+
+function SOURCE_INSTALL {
+    cd $USER_WORKING_FOLDER
+    mkdir -p $SOURCE_NAME
+    cd $SOURCE_NAME
+
+    if [ ! -f android-sdk_r24.4.1-linux.tgz ]; then
+        wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+        rm -rf android-sdk-linux
+        tar xzf android-sdk_r24.4.1-linux.tgz
+    fi
+
+    echo export PATH=PATH:"`pwd`/android-sdk-linux/tools:\$PATH" > .profile
+    echo source `pwd`/.profile >> $USER_BASH_PROFILE
+
+    echo "Running [android] tool for installing the android SDK packages"
+    echo -n "Enter press to continue [ENTER]: "
+    read TMP_INPUT
+    android &
+}

@@ -1,0 +1,12 @@
+
+function SOURCE_GET_TEST_CMD {
+    SOURCE_TEST_CMD='emacs'
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`emacs --version | grep "GNU Emacs" | grep -v WARRANTY | sed "s/GNU Emacs //"`
+}
+
+function SOURCE_GET_INSTALL_CMD {
+    SOURCE_INSTALL_CMD=`sudo apt-get -y install emacs24-nox`
+}

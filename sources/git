@@ -1,0 +1,12 @@
+
+function SOURCE_GET_TEST_CMD {
+    SOURCE_TEST_CMD='git'
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`git --version | sed "s/git version //"`
+}
+
+function SOURCE_GET_INSTALL_CMD {
+    SOURCE_INSTALL_CMD=`sudo apt-get -y install git`
+}
