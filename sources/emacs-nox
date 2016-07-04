@@ -7,6 +7,18 @@ function SOURCE_GET_VERSION {
     SOURCE_VERSION=`emacs --version | grep "GNU Emacs" | grep -v WARRANTY | sed "s/GNU Emacs //"`
 }
 
-function SOURCE_GET_INSTALL_CMD {
-    SOURCE_INSTALL_CMD=`sudo apt-get -y install emacs24-nox`
+function SOURCE_INSTALL {
+    sudo apt-get -y install emacs24-nox
+}
+
+function SOURCE_FINALIZE {
+    touch $HOME/.emacs
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+
+    if [ ! -f $USER_CONFIG_FOLDER/$SOURCE_NAME/.emacs ]; then
+        cp $HOME/.emacs $USER_CONFIG_FOLDER/$SOURCE_NAME/.emacs
+    fi
+
+    rm $HOME/.emacs
+    ln -s $USER_CONFIG_FOLDER/$SOURCE_NAME/.emacs $HOME/.emacs
 }

@@ -1,0 +1,25 @@
+
+function SOURCE_GET_TEST_CMD {
+    which synapse &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    # Could not get synapse version
+    SOURCE_VERSION="?"
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get -y install synapse
+}
+
+function SOURCE_FINALIZE {
+    mkdir -p $HOME/.config/synapse/
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+
+    if [ ! -f $USER_CONFIG_FOLDER/$SOURCE_NAME/config.json ]; then
+        cp $HOME/.config/synapse/config.json $USER_CONFIG_FOLDER/$SOURCE_NAME/config.json
+    fi
+
+    rm $HOME/.config/synapse/config.json
+    ln -s $USER_CONFIG_FOLDER/$SOURCE_NAME/config.json $HOME/.config/synapse/config.json
+}

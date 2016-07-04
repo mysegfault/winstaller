@@ -6,11 +6,29 @@ function os_install {
 
     # Reset vars
     SOURCE_VERSION=""
-
+    function SOURCE_INSTALL {
+        return;
+    }
+    function SOURCE_GET_VERSION {
+        return;
+    }
+    function SOURCE_GET_TEST_CMD {
+        return;
+    }
+    function SOURCE_FINALIZE {
+        return;
+    }
+    
     # Load source configuration
-    source sources/$SOURCE_NAME && debug "Configuration loaded for [$SOURCE_NAME]..." || die "Missing source configuration for [$SOURCE_NAME]." $ERR_MISSING_SOURCE_CONFIG
+    if [ ! -f sources/$SOURCE_NAME ]; then
+        echo "Missing source configuration for [$SOURCE_NAME]."
+        return;
+    fi
+    source sources/$SOURCE_NAME && debug "Configuration loaded for [$SOURCE_NAME]..." || die "Error while loading [$SOURCE_NAME]." $ERR_MISSING_SOURCE_CONFIG
 
     SOURCE_GET_TEST_CMD && os_install_already || os_install_run
+
+    SOURCE_FINALIZE
 }
 
 function os_install_run {

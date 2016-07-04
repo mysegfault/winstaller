@@ -1,0 +1,12 @@
+
+function SOURCE_GET_TEST_CMD {
+    which locate &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`locate --version | grep locate | sed "s/locate (GNU findutils) //"`
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get -y install locate
+}

@@ -1,2 +1,13 @@
 
-TEST_CMD=npm
+function SOURCE_GET_TEST_CMD {
+    which nodejs &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    # Could not get synapse version
+    SOURCE_VERSION=`nodejs --version`
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get -y install nodejs
+}

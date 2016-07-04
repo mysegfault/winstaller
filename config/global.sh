@@ -1,10 +1,12 @@
 
 SOURCES=(
-#    git
-#    emacs-nox
+    git
+    emacs-nox
     android-sdk
-#    nodejs
-#    microsoft-visual-studio-code
+    locate
+    synapse
+    nodejs
+    visual-studio-code
 )
 
 USER_CONFIG_FOLDER=~/Documents/winstaller-config-files
