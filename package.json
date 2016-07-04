@@ -1,11 +1,16 @@
 {
   "name": "wininstaller",
   "version": "0.0.1",
-  "description": "General installer based on custom configuration",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "preferGlobal": true,
+  "description": "Software and package installer with your their own configuration",
+  "main": "wininstaller",
+  "bin": {
+    "wininstaller": "./bin/wininstaller"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mysegfault/winstaller.git"
+  },
+  "author": "https://github.com/mysegfault",
   "license": "MIT"
 }
