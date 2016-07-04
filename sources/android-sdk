@@ -10,9 +10,8 @@ function SOURCE_GET_VERSION {
 }
 
 function SOURCE_INSTALL {
-    cd $USER_WORKING_FOLDER
-    mkdir -p $SOURCE_NAME
-    cd $SOURCE_NAME
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+    cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
 
     if [ ! -f android-sdk_r24.4.1-linux.tgz ]; then
         wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
@@ -20,11 +19,16 @@ function SOURCE_INSTALL {
         tar xzf android-sdk_r24.4.1-linux.tgz
     fi
 
-    echo export PATH=PATH:"`pwd`/android-sdk-linux/tools:\$PATH" > .profile
-    echo source `pwd`/.profile >> $USER_BASH_PROFILE
-
     echo "Running [android] tool for installing the android SDK packages"
     echo -n "Enter press to continue [ENTER]: "
     read TMP_INPUT
     android &
+}
+
+function SOURCE_FINALIZE {
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+    cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
+
+    echo export PATH=PATH:"`pwd`/android-sdk-linux/tools:\$PATH" > .profile
+    echo source `pwd`/.profile >> $USER_BASH_PROFILE
 }

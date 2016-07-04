@@ -1,5 +1,6 @@
 
 SOURCES=(
+    bash
     git
     emacs-nox
     android-sdk

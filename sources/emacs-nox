@@ -14,9 +14,10 @@ function SOURCE_INSTALL {
 function SOURCE_FINALIZE {
     touch $HOME/.emacs
     mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+    cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
 
-    if [ ! -f $USER_CONFIG_FOLDER/$SOURCE_NAME/.emacs ]; then
-        cp $HOME/.emacs $USER_CONFIG_FOLDER/$SOURCE_NAME/.emacs
+    if [ ! -f .emacs ]; then
+        cp $HOME/.emacs .emacs
     fi
 
     rm $HOME/.emacs

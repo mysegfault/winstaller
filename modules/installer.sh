@@ -11,4 +11,5 @@ done
 
 # Remove duplicates in the bash profile file
 TMPFILE=`tempfile`
-cat $USER_BASH_PROFILE | uniq > $TMPFILE && cat $TMPFILE > $USER_BASH_PROFILE
+touch $USER_BASH_PROFILE
+cat $USER_BASH_PROFILE | sort | uniq > $TMPFILE && cat $TMPFILE > $USER_BASH_PROFILE
