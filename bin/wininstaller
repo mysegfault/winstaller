@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ..
+
 ## Manage options
 source modules/usage.sh || exit 1
 
