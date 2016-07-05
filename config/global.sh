@@ -12,6 +12,6 @@ SOURCES=(
 
 USER_CONFIG_FOLDER=~/Documents/winstaller-config-files
 USER_WORKING_FOLDER=~/.wininstaller
-USER_BASH_PROFILE=$USER_WORKING_FOLDER/winistaller-bash.profile
+USER_BASH_PROFILE=$USER_WORKING_FOLDER/wininstaller-bash.profile
 
 CURRENT_DIR=`pwd`
