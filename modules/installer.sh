@@ -4,6 +4,11 @@ mkdir -p $USER_CONFIG_FOLDER
 # Create working folder
 mkdir -p $USER_WORKING_FOLDER
 
+# Uninstall all unsources declared
+for i in ${UNSOURCES[@]}; do
+    os_uninstall "${i}"
+done
+
 # Install all sources declared
 for i in ${SOURCES[@]}; do
     os_install "${i}"

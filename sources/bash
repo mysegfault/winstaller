@@ -10,14 +10,3 @@ function SOURCE_GET_VERSION {
 function SOURCE_INSTALL {
     sudo apt-get -y install bash
 }
-
-function SOURCE_FINALIZE {
-    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
-    cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
-
-    if [ ! -f .bashrc ]; then
-        echo "# Enter here your bash configuration" > .bashrc
-    fi
-
-    echo source `pwd`/.bashrc >> $USER_BASH_PROFILE
-}

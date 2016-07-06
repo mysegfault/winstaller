@@ -1,0 +1,24 @@
+
+function SOURCE_GET_TEST_CMD {
+    which sparkleshare &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`sparkleshare --version | grep Version | sed "s/Version: //"`
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get -y install sparkleshare
+}
+
+function SOURCE_FINALIZE {
+    mkdir -p $HOME/.config/sparkleshare/
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+
+    if [ ! -f $USER_CONFIG_FOLDER/$SOURCE_NAME/config.xml ]; then
+        cp $HOME/.config/sparkleshare/config.xml $USER_CONFIG_FOLDER/$SOURCE_NAME/config.xml
+    fi
+
+    rm $HOME/.config/sparkleshare/config.xml
+    ln -s $USER_CONFIG_FOLDER/$SOURCE_NAME/config.xml $HOME/.config/sparkleshare/config.xml
+}

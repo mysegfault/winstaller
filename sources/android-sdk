@@ -22,7 +22,9 @@ function SOURCE_INSTALL {
     echo "Running [android] tool for installing the android SDK packages"
     echo -n "Enter press to continue [ENTER]: "
     read TMP_INPUT
-    android-sdk-linux/tools/android &
+
+    # Force SDK update without the ui
+    android-sdk-linux/tools/android update sdk --no-ui
 }
 
 function SOURCE_FINALIZE {

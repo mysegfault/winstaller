@@ -1,0 +1,4 @@
+
+function SOURCE_UNINSTALL {
+    sudo apt-get -y remove evolution
+}

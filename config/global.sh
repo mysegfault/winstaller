@@ -8,6 +8,12 @@ SOURCES=(
     synapse
     nodejs
     visual-studio-code
+    sparkleshare
+    gnome3
+)
+UNSOURCES=(
+    thunderbird
+    evolution
 )
 
 USER_CONFIG_FOLDER=~/Documents/winstaller-config-files

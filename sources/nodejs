@@ -11,3 +11,29 @@ function SOURCE_GET_VERSION {
 function SOURCE_INSTALL {
     sudo apt-get -y install nodejs
 }
+
+function SOURCE_FINALIZE {
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+    cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
+
+    # Configure npm so you can install global packages without the "sudo" command
+    mkdir -p $HOME/.npm-packages
+
+    if [ ! -f .bashrc ]; then
+        echo "export NPM_PACKAGES=\$HOME/.npm-packages" > .bashrc
+        echo "export NODE_PATH=\$NPM_PACKAGES/lib/node_modules:\$NODE_PATH" >> .bashrc
+        echo "export PATH=\$NPM_PACKAGES/bin:\$PATH" >> .bashrc
+    fi
+    echo source `pwd`/.bashrc >> $USER_BASH_PROFILE
+
+    touch $HOME/.npmrc
+    if [ ! -f .npmrc ]; then
+        cp $HOME/.npmrc .npmrc
+    fi
+
+    rm $HOME/.npmrc
+    ln -s $USER_CONFIG_FOLDER/$SOURCE_NAME/.npmrc $HOME/.npmrc
+
+    npm config set prefix=$HOME/.npm-packages
+}
+
