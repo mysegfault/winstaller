@@ -1,13 +1,23 @@
 
 VERBOSE=0
+SETUPMODE=0
+
+function echoVersion {
+    echo grep version package.json | sed "s/  \"version\": //" | sed "s/[,\"]//g";
+}
 
 while [ "$1" != "" ]; do
     case $1 in
-        -v | --verbose )        VERBOSE=1
+        -s | --setup )          SETUPMODE=1
                                 ;;
-        -vv )                   VERBOSE=2
+        -d | --debug )          VERBOSE=1
+                                ;;
+        -dd | --debug-all )     VERBOSE=2
                                 ;;
         -h | --help )           usage
+                                exit
+                                ;;
+        -v | --version )        echoVersion
                                 exit
                                 ;;
         * )                     usage
