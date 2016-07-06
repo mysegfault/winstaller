@@ -6,6 +6,10 @@ function echoVersion {
     grep version package.json | sed "s/  \"version\": //" | sed "s/[,\"]//g";
 }
 
+function usage {
+    echo "usage: " $0 " [[[-v]] | [-h]]"
+}
+
 while [ "$1" != "" ]; do
     case $1 in
         -s | --setup )          SETUPMODE=1
