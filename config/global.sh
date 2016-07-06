@@ -13,6 +13,8 @@ USER_WORKING_FOLDER=~/.winstaller
 
 USER_BASH_PROFILE=$USER_WORKING_FOLDER/winstaller-bash.profile
 
+ARCH=`uname -m`
+
 # Read configuration
 SOURCES=(
 )

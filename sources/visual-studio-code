@@ -9,9 +9,8 @@ function SOURCE_GET_VERSION {
 }
 
 function SOURCE_INSTALL {
-    cd $USER_WORKING_FOLDER
-    mkdir -p $SOURCE_NAME
-    cd $SOURCE_NAME
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
 
     if [ ! -f vscode-amd64.deb ]; then
         wget "https://az764295.vo.msecnd.net/stable/fe7f407b95b7f78405846188259504b34ef72761/vscode-amd64.deb"
