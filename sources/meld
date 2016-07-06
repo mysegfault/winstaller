@@ -1,0 +1,12 @@
+
+function SOURCE_GET_TEST_CMD {
+    which meld &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`meld --version`
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get -y install meld
+}

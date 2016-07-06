@@ -1,6 +1,6 @@
 
 function SOURCE_GET_TEST_CMD {
-    SOURCE_TEST_CMD='emacs'
+    which emacs &> /dev/null
 }
 
 function SOURCE_GET_VERSION {
