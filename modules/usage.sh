@@ -7,7 +7,7 @@ function echoVersion {
 }
 
 function usage {
-    echo "usage: " $0 " [[[-v]] | [-h]]"
+    echo "usage: " $EXE_NAME " [[[-v]] | [-h]]"
 }
 
 while [ "$1" != "" ]; do
