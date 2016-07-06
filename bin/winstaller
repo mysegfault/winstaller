@@ -12,7 +12,7 @@ source modules/usage.sh || exit 1
 ## Get OS configuration
 source modules/os.sh || exit 1
 
-## Check winistaller activation
+## Check winstaller activation
 source modules/configure.sh || exit 1
 
 ## Run main installer, os dependant

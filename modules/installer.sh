@@ -29,7 +29,7 @@ if [ "$SETUPMODE" = "1" ]; then
     UNSOURCES=()
 
     for _sources in `ls sources` ; do
-        if [ "${_sources,}" = "winistaller" ]; then
+        if [ "${_sources,}" = "winstaller" ]; then
             continue;
         fi
 
@@ -47,18 +47,17 @@ if [ "$SETUPMODE" = "1" ]; then
         fi
     done;
 
-    mkdir -p $USER_CONFIG_FOLDER/winistaller/
     # Reset files
-    echo -n "" > $USER_CONFIG_FOLDER/winistaller/sources.list
-    echo -n "" > $USER_CONFIG_FOLDER/winistaller/unsources.list
+    echo -n "" > $USER_CONFIG_FOLDER/winstaller/sources.list
+    echo -n "" > $USER_CONFIG_FOLDER/winstaller/unsources.list
 
     for i in ${UNSOURCES[@]}; do
-        echo "${i}" >> $USER_CONFIG_FOLDER/winistaller/unsources.list
+        echo "${i}" >> $USER_CONFIG_FOLDER/winstaller/unsources.list
     done
 
     # Install all sources declared
     for i in ${SOURCES[@]}; do
-        echo "${i}" >> $USER_CONFIG_FOLDER/winistaller/sources.list
+        echo "${i}" >> $USER_CONFIG_FOLDER/winstaller/sources.list
     done
 
     echo ""
@@ -68,8 +67,8 @@ if [ "$SETUPMODE" = "1" ]; then
 
 fi
 
-# force winistaller to be in the SOURCES list
-SOURCES+=('winistaller')
+# force winstaller to be in the SOURCES list
+SOURCES+=('winstaller')
 
 # Uninstall all unsources declared
 for i in ${UNSOURCES[@]}; do

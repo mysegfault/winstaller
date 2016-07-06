@@ -3,7 +3,7 @@ function configure_bash {
     log "Configuring bash..."
 
     echo "
-# winistaller bash configuration file
+# winstaller bash configuration file
 if [ -f $USER_BASH_PROFILE ]; then
     . $USER_BASH_PROFILE
 fi
