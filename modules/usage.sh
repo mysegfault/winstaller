@@ -3,7 +3,7 @@ VERBOSE=0
 SETUPMODE=0
 
 function echoVersion {
-    echo grep version package.json | sed "s/  \"version\": //" | sed "s/[,\"]//g";
+    grep version package.json | sed "s/  \"version\": //" | sed "s/[,\"]//g";
 }
 
 while [ "$1" != "" ]; do

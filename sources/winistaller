@@ -1,0 +1,4 @@
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`wininstaller --version`
+}
