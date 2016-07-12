@@ -1,10 +1,4 @@
 
-## Find out the installed folder and go to the main ressources
-REAL_BIN_PATH=`realpath $0`
-REAL_BIN_PATH=`dirname $REAL_BIN_PATH`
-REAL_BIN_PATH=`dirname $REAL_BIN_PATH`
-cd $REAL_BIN_PATH
-
 CURRENT_DIR=`pwd`
 EXE_NAME=`basename $0`
 
