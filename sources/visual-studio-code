@@ -1,7 +1,14 @@
 
+LATEST_VERSION=1.3.0
 
 function SOURCE_GET_TEST_CMD {
-    which code &> /dev/null
+    which code &> /dev/null || return 1
+
+    SOURCE_GET_VERSION
+
+    if [ "$SOURCE_VERSION" != "$LATEST_VERSION" ]; then
+        return 2
+    fi
 }
 
 function SOURCE_GET_VERSION {
@@ -12,9 +19,9 @@ function SOURCE_INSTALL {
     mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
     cd $USER_WORKING_FOLDER/$SOURCE_NAME
 
-    if [ ! -f vscode-amd64.deb ]; then
-        wget "https://az764295.vo.msecnd.net/stable/fe7f407b95b7f78405846188259504b34ef72761/vscode-amd64.deb"
+    if [ ! -f "vscode-amd64-$LATEST_VERSION.deb" ]; then
+        wget -O "vscode-amd64-$LATEST_VERSION.deb" "https://az764295.vo.msecnd.net/stable/e724f269ded347b49fcf1657fc576399354e6703/code_1.3.0-1467909982_amd64.deb"
     fi
 
-    sudo dpkg -i vscode-amd64.deb
+    sudo dpkg -i "vscode-amd64-$LATEST_VERSION.deb"
 }
