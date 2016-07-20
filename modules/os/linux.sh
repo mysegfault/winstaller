@@ -55,11 +55,16 @@ function os_install {
     }
     
     # Load source configuration
-    if [ ! -f sources/$SOURCE_NAME ]; then
-        echo "Missing source configuration for [$SOURCE_NAME]."
-        return;
+    _SOURCE_PATH="sources"
+    if [ ! -f $_SOURCE_PATH/$SOURCE_NAME ]; then
+        # Try to find user defined sources
+       _SOURCE_PATH=$USER_CONFIG_FOLDER/$EXE_NAME/sources
+        if [ ! -f $_SOURCE_PATH/$SOURCE_NAME ]; then
+            echo "Missing source configuration for [$SOURCE_NAME]."
+            return;
+        fi
     fi
-    source sources/$SOURCE_NAME && debug "Configuration loaded for [$SOURCE_NAME]..." || die "Error while loading [$SOURCE_NAME]." $ERR_MISSING_SOURCE_CONFIG
+    source $_SOURCE_PATH/$SOURCE_NAME && debug "Configuration loaded for [$SOURCE_NAME]..." || die "Error while loading [$SOURCE_NAME]." $ERR_MISSING_SOURCE_CONFIG
 
     SOURCE_GET_TEST_CMD && os_install_already || os_install_run
 

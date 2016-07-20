@@ -4,7 +4,7 @@ EXE_NAME=`basename $0`
 
 USER_CONFIG_FOLDER=~/Documents/winstaller-config-files
 USER_WORKING_FOLDER=~/.winstaller
-
+USER_BIN_FOLDER=$USER_WORKING_FOLDER/.bin
 USER_BASH_PROFILE=$USER_WORKING_FOLDER/winstaller-bash.profile
 
 ARCH=`uname -m`
@@ -14,6 +14,8 @@ SOURCES=(
 )
 UNSOURCES=(
 )
+
+mkdir -p $USER_BIN_FOLDER
 
 mkdir -p $USER_CONFIG_FOLDER/winstaller/
 touch $USER_CONFIG_FOLDER/winstaller/sources.list

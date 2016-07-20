@@ -2,3 +2,11 @@
 function SOURCE_GET_VERSION {
     SOURCE_VERSION=`winstaller --version`
 }
+
+function SOURCE_FINALIZE {
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+    cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
+
+    echo "export PATH=$USER_BIN_FOLDER:\$PATH" > .profile
+    echo "source `pwd`/.profile" >> $USER_BASH_PROFILE
+}
