@@ -23,3 +23,6 @@ source modules/configure.sh || exit 1
 
 ## Run main installer, os dependant
 source modules/installer.sh || exit 1
+
+## Run main installer, os dependant
+source modules/outro.sh || exit 1
