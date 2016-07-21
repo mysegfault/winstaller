@@ -1,0 +1,29 @@
+
+LATEST_VERSION=4.3.0.37
+
+function SOURCE_GET_TEST_CMD {
+    which skype &> /dev/null || return 1
+
+    SOURCE_GET_VERSION
+
+    if [ "$SOURCE_VERSION" != "$LATEST_VERSION" ]; then
+        return 2
+    fi
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`skype --version | grep -v "©" | sed -e "s/Skype //"`
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    if [ ! -f "skype-$LATEST_VERSION.tar.bz2" ]; then
+        wget -O "skype-$LATEST_VERSION.tar.bz2" "https://download.skype.com/linux/skype-4.3.0.37.tar.bz2"
+    fi
+
+    tar -jxf skype-$LATEST_VERSION.tar.bz2
+
+    ln -s $USER_WORKING_FOLDER/$SOURCE_NAME/skype-$LATEST_VERSION/skype $USER_BIN_FOLDER/skype
+}
