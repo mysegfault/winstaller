@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# check mandatory dependancies
+which realpath &> /dev/null || (echo "Installing mandatory tools" && sudo apt-get install realpath)
+
 ## Find out the installed folder and go to the main ressources
 REAL_BIN_PATH=`realpath $0`
 REAL_BIN_PATH=`dirname $REAL_BIN_PATH`
