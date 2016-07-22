@@ -1,0 +1,12 @@
+
+function SOURCE_GET_TEST_CMD {
+    which keepassx &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`keepassx --version 2>&1| grep keep | sed -s "s/keepassx //"`
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get install keepassx
+}
