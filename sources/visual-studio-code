@@ -24,4 +24,7 @@ function SOURCE_INSTALL {
     fi
 
     sudo dpkg -i "vscode-amd64-$LATEST_VERSION.deb"
+    
+    ## Run "apt-get -f install" so it will install the dependencies
+    sudo apt-get -f install
 }

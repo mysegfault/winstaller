@@ -1,0 +1,40 @@
+
+
+function SOURCE_GET_TEST_CMD {
+    which dropbox &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`dropbox --version"`
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    if [ $IS_DEBIAN ]; then
+        case "${ARCH,}" in
+                x86_64)
+                    if [ ! -f "dropbox-$ARCH.deb" ]; then
+                        wget -O "dropbox-$ARCH.deb" "https://www.dropbox.com/download?dl=packages/debian/dropbox_2015.10.28_amd64.deb"
+                    fi
+                    ;;
+                i386)
+                    if [ ! -f "dropbox-$ARCH.deb" ]; then
+                        wget -O "dropbox-$ARCH.deb" "https://www.dropbox.com/download?dl=packages/debian/dropbox_2015.10.28_i386.deb"
+                    fi
+                    ;;
+                *)
+                    echo $"Your OS [$OS] is not supported yet."
+                    exit 1
+        
+        esac
+    else
+        log "Your OS is not supported yet!" 100
+    fi
+
+    sudo dpkg -i "dropbox-$ARCH.deb"
+
+    ## Run "apt-get -f install" so it will install the dependencies
+    sudo apt-get -f install
+}

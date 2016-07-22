@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# check mandatory dependancies
+# check mandatory dependencies
 which realpath &> /dev/null || (echo "Installing mandatory tools" && sudo apt-get install realpath)
 
 ## Find out the installed folder and go to the main ressources
