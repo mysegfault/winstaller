@@ -1,0 +1,25 @@
+
+function SOURCE_GET_TEST_CMD {
+    which ssh &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`ssh -V 2>&1 | cut -d " " -f1`
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get -y install openssh-client
+}
+
+function SOURCE_FINALIZE {
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+    cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
+
+    touch $HOME/.ssh/config
+    if [ ! -f config ]; then
+        cp $HOME/.ssh/config .
+    fi
+
+    rm $HOME/.ssh/config
+    ln -s $USER_CONFIG_FOLDER/$SOURCE_NAME/config $HOME/.ssh/config
+}
