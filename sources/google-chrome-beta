@@ -1,0 +1,22 @@
+
+function SOURCE_GET_TEST_CMD {
+    which google-chrome-beta &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`google-chrome-beta --version | sed -e "s/Google Chrome //" | sed -e "s/ beta//"`
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    if [ ! -f "google-chrome-beta_current_amd64.deb" ]; then
+        wget "https://dl.google.com/linux/direct/google-chrome-beta_current_amd64.deb"
+    fi
+
+    sudo dpkg -i google-chrome-beta_current_amd64.deb
+
+    ## Run "apt-get -f install" so it will install the dependancies
+    sudo apt-get -f install
+}
