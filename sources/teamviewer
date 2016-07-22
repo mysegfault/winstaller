@@ -1,0 +1,33 @@
+
+LATEST_VERSION=11.0.57095
+
+function SOURCE_GET_TEST_CMD {
+    which teamviewer &> /dev/null || return 1
+
+    SOURCE_GET_VERSION
+
+    if [ "$SOURCE_VERSION" != "$LATEST_VERSION" ]; then
+        return 2
+    fi
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`teamviewer --version | grep Team | strings | grep DEB | sed -e "s/\[0m //" | sed -e "s/  (DEB)//" | sed -e "s/ //"`
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    # Installing libpng12 (needed for Debian 9)
+    if [ ! -f "libpng12-0_1.2.50-2+deb8u2_i386.deb" ]; then
+        wget "http://ftp.us.debian.org/debian/pool/main/libp/libpng/libpng12-0_1.2.50-2+deb8u2_i386.deb"
+    fi
+    sudo dpkg -i libpng12-0_1.2.50-2+deb8u2_i386.deb
+
+    if [ ! -f "teamviewer-$LATEST_VERSION.deb" ]; then
+        wget -O "teamviewer-$LATEST_VERSION.deb" "https://download.teamviewer.com/download/teamviewer_i386.deb"
+    fi
+
+    sudo dpkg -i "teamviewer-$LATEST_VERSION.deb"
+}
