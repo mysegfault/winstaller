@@ -17,6 +17,6 @@ function SOURCE_INSTALL {
 
     sudo dpkg -i google-chrome-beta_current_amd64.deb
 
-    ## Run "apt-get -f install" so it will install the dependancies
+    ## Run "apt-get -f install" so it will install the dependencies
     sudo apt-get -f install
 }
