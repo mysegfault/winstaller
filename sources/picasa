@@ -1,0 +1,21 @@
+
+function SOURCE_GET_TEST_CMD {
+    ls "$HOME/.wine/dosdevices/c:/Program Files (x86)/Google/Picasa3/Picasa3.exe" &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION="?"
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    if [ ! -f "picasa39-setup.exe" ]; then
+        wget -O "picasa39-setup.exe" "http://dl.google.com/picasa/picasa39-setup.exe"
+    fi
+
+    sudo apt-get install wine
+    
+    wine picasa39-setup.exe
+}
