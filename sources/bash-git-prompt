@@ -1,0 +1,36 @@
+
+function SOURCE_GET_TEST_CMD {
+    if [ ! -d "$USER_WORKING_FOLDER/$SOURCE_NAME/bash-git-prompt" ]; then
+        return 1
+    fi
+
+    return 0
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION='?'
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    if [ ! -d "bash-git-prompt" ]; then
+        git clone https://github.com/magicmonty/bash-git-prompt.git bash-git-prompt --depth=1
+    fi
+
+    cd bash-git-prompt
+    git pull
+    cd ..
+
+    echo "source `pwd`/bash-git-prompt/gitprompt.sh" > .profile
+    echo "source `pwd`/.profile" >> $USER_BASH_PROFILE
+}
+
+function SOURCE_FINALIZE {
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    # Update project
+    cd bash-git-prompt
+    git pull
+}
