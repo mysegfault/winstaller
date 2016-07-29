@@ -1,4 +1,8 @@
 
+function SOURCE_GET_TEST_CMD {
+    which evolution &> /dev/null
+}
+
 function SOURCE_UNINSTALL {
     sudo apt-get -y remove evolution
 }

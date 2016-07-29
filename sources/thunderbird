@@ -1,0 +1,8 @@
+
+function SOURCE_GET_TEST_CMD {
+    which thunderbird &> /dev/null
+}
+
+function SOURCE_UNINSTALL {
+    sudo apt-get -y remove thunderbird
+}

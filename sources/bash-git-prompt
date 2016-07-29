@@ -20,7 +20,7 @@ function SOURCE_INSTALL {
     fi
 
     cd bash-git-prompt
-    git pull
+    git pull > /dev/null
     cd ..
 
     echo "source `pwd`/bash-git-prompt/gitprompt.sh" > .profile
@@ -32,5 +32,5 @@ function SOURCE_FINALIZE {
 
     # Update project
     cd bash-git-prompt
-    git pull
+    git pull > /dev/null
 }
