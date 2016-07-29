@@ -1,0 +1,15 @@
+
+function SOURCE_GET_TEST_CMD {
+    which pdftk &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`pdftk --version | grep pdftk | grep -v Copyright | cut -d " " -f2`
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+	sudo apt-get install -y pdftk
+}
