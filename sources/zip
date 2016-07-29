@@ -1,0 +1,16 @@
+
+function SOURCE_GET_TEST_CMD {
+    which zip &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`zip --version | grep "This is Zip" | cut -d " " -f4`
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+	sudo apt-get install -y zip
+}
+
