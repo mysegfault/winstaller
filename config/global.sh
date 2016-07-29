@@ -26,5 +26,5 @@ for _sources in `cat $USER_CONFIG_FOLDER/winstaller/sources.list` ; do
 done;
 
 for _unsources in `cat $USER_CONFIG_FOLDER/winstaller/unsources.list` ; do
-    SOURCES+=($_unsources)
+    UNSOURCES+=($_unsources)
 done;

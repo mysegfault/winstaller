@@ -4,20 +4,26 @@ function os_uninstall {
     log "Trying to uninstall [$SOURCE_NAME]..."
 
     # Reset vars & functions
+    function SOURCE_GET_TEST_CMD {
+        return;
+    }
     function SOURCE_UNINSTALL {
         return;
     }
 
     # Load source configuration
-    if [ ! -f sources/$SOURCE_NAME ]; then
-        echo "Missing source configuration for [$SOURCE_NAME]."
-        return;
+    _SOURCE_PATH="sources"
+    if [ ! -f $_SOURCE_PATH/$SOURCE_NAME ]; then
+        # Try to find user defined sources
+       _SOURCE_PATH=$USER_CONFIG_FOLDER/$EXE_NAME/sources
+        if [ ! -f $_SOURCE_PATH/$SOURCE_NAME ]; then
+            echo "Missing source configuration for [$SOURCE_NAME]."
+            return;
+        fi
     fi
-    source sources/$SOURCE_NAME && debug "Configuration loaded for [$SOURCE_NAME]..." || die "Error while loading [$SOURCE_NAME]." $ERR_MISSING_SOURCE_CONFIG
+    source $_SOURCE_PATH/$SOURCE_NAME && debug "Configuration loaded for [$SOURCE_NAME]..." || die "Error while loading [$SOURCE_NAME]." $ERR_MISSING_SOURCE_CONFIG
 
-    SOURCE_UNINSTALL && echo "Uninstallation of [$SOURCE_NAME] successfull" || echo "Could not uninstall [$SOURCE_NAME]!"
-
-    sudo apt -qq autoremove
+    SOURCE_GET_TEST_CMD && (SOURCE_UNINSTALL && echo "Uninstallation of [$SOURCE_NAME] successfull" || echo "Could not uninstall [$SOURCE_NAME]!") || echo "[$SOURCE_NAME] is already uninstalled..."
 
     # Force to go back to the current folder
     cd $CURRENT_DIR
