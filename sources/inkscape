@@ -1,0 +1,12 @@
+
+function SOURCE_GET_TEST_CMD {
+    which inkscape &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`inkscape --version 2>&1 | grep Inkscape | cut -d " " -f2`
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get -y install inkscape
+}
