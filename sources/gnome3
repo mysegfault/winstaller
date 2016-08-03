@@ -3,11 +3,20 @@ function SOURCE_FINALIZE {
     mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
     cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
 
+    ## mimeapps.list
     touch $HOME/.config/mimeapps.list
     if [ ! -f mimeapps.list ]; then
         cp $HOME/.config/mimeapps.list mimeapps.list
     fi
-
     rm $HOME/.config/mimeapps.list
     ln -s $USER_CONFIG_FOLDER/$SOURCE_NAME/mimeapps.list $HOME/.config/mimeapps.list
+
+    ## bookmarks
+    mkdir -p $HOME/.config/gtk-3.0
+    touch $HOME/.config/gtk-3.0/bookmarks
+    if [ ! -f bookmarks ]; then
+        cp $HOME/.config/gtk-3.0/bookmarks bookmarks
+    fi
+    rm $HOME/.config/gtk-3.0/bookmarks
+    ln -s $USER_CONFIG_FOLDER/$SOURCE_NAME/bookmarks $HOME/.config/gtk-3.0/bookmarks
 }
