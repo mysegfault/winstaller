@@ -1,0 +1,77 @@
+
+LATEST_VERSION=5.1.2
+
+function SOURCE_GET_TEST_CMD {
+    which virtualbox &> /dev/null || return 1
+
+    SOURCE_GET_VERSION
+
+    if [ "$SOURCE_VERSION" != "$LATEST_VERSION" ]; then
+        return 2
+    fi
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`virtualbox --help | grep "Oracle VM VirtualBox Manager" | cut -d " " -f5`
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    if [ $IS_DEBIAN ]; then
+        case "$ARCH" in
+                x86_64)
+                    if [ ! -f "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb" ]; then
+                        case "$DISTRO_NAME" in
+                            stretch)
+                                wget -O "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb" "http://download.virtualbox.org/virtualbox/5.1.2/virtualbox-5.1_5.1.2-108956~Debian~stretch_amd64.deb"
+                            ;;
+                            jessie)
+                                wget -O "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb" "http://download.virtualbox.org/virtualbox/5.1.2/virtualbox-5.1_5.1.2-108956~Debian~jessie_amd64.deb"
+                            ;;
+                            wheezy)
+                                wget -O "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb" "http://download.virtualbox.org/virtualbox/5.1.2/virtualbox-5.1_5.1.2-108956~Debian~wheezy_amd64.deb"
+                            ;;
+                        esac
+                    fi
+                    ;;
+                i386)
+                    if [ ! -f "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb" ]; then
+                        case "$DISTRO_NAME" in
+                            stretch)
+                                wget -O "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb" "http://download.virtualbox.org/virtualbox/5.1.2/virtualbox-5.1_5.1.2-108956~Debian~stretch_i386.deb"
+                            ;;
+                            jessie)
+                                wget -O "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb" "http://download.virtualbox.org/virtualbox/5.1.2/virtualbox-5.1_5.1.2-108956~Debian~jessie_i386.deb"
+                            ;;
+                            wheezy)
+                                wget -O "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb" "http://download.virtualbox.org/virtualbox/5.1.2/virtualbox-5.1_5.1.2-108956~Debian~wheezy_i386.deb"
+                            ;;
+                        esac
+                    fi
+                    ;;
+                *)
+                    echo $"Your OS [$OS] is not supported yet."
+                    exit 1
+        esac
+    else
+        log "Your OS is not supported yet!"
+        exit 2
+    fi
+
+    # dependencies
+    sudo apt-get install linux-headers-`uname -r`
+
+    case "$ARCH" in
+        x86_64)
+                sudo apt-get install linux-headers-amd64
+                ;;
+            *)
+    esac
+
+    sudo dpkg -i "virtualbox-$LATEST_VERSION-$ARCH-$DISTRO_NAME.deb"
+    
+    ## Run "apt-get -f install" so it will install the dependencies
+    sudo apt-get -f install
+}
