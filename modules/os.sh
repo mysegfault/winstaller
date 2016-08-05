@@ -1,10 +1,13 @@
 
 OS=`uname`
+# Lowercase
+OS=${OS,,}
 log "OS is $OS"
 
 IS_LINUX=
 IS_DEBIAN=
 IS_UBUNTU=
+DISTRO_NAME=
 
 if [ `uname` == "Linux" ]; then
     log "Is Linux!"
@@ -13,8 +16,11 @@ fi
 
 if [ $IS_LINUX ]; then
     if uname -a | grep -i "Debian" &> /dev/null; then
-        log "Is Debian!"
         IS_DEBIAN=1
+        DISTRO_NAME=`cat /etc/debian_version | cut -d "/" -f1`
+        # Lowercase
+        DISTRO_NAME=${DISTRO_NAME,,}
+        log "Is Debian ($DISTRO_NAME)"
     fi
 
     if uname -a | grep -i "Ubuntu" &> /dev/null; then
@@ -24,7 +30,7 @@ if [ $IS_LINUX ]; then
 fi
 
 # Lowercase
-case "${OS,}" in
+case "$OS" in
         linux)
             source modules/os/linux.sh
             ;;

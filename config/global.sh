@@ -8,6 +8,8 @@ USER_BIN_FOLDER=$USER_WORKING_FOLDER/.bin
 USER_BASH_PROFILE=$USER_WORKING_FOLDER/winstaller-bash.profile
 
 ARCH=`uname -m`
+# Lowercase
+ARCH=${ARCH,,}
 
 # Read configuration
 SOURCES=(

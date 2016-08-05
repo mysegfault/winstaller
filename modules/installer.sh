@@ -29,17 +29,17 @@ if [ "$SETUPMODE" = "1" ]; then
     UNSOURCES=()
 
     for _sources in `ls sources` ; do
-        if [ "${_sources,}" = "winstaller" ]; then
+        if [ "${_sources,,}" = "winstaller" ]; then
             continue;
         fi
 
         ## TODO: suggest the already configured option here
         echo -n "Install(I)/Uninstall(U)/None(ENTER) $_sources (ENTER/i/u): "
         read _ANSWER
-        if [ "${_ANSWER,}" = "i" ]; then
+        if [ "${_ANSWER,,}" = "i" ]; then
             echo "  + Adding $_sources to the installation list."
             SOURCES+=($_sources)
-        elif [ "${_ANSWER,}" = "u" ]; then
+        elif [ "${_ANSWER,,}" = "u" ]; then
             echo "  - Adding $_sources to the UNinstallation list."
             UNSOURCES+=($_sources)
         else
