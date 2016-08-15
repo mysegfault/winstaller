@@ -28,3 +28,18 @@ function SOURCE_INSTALL {
     ## Run "apt-get -f install" so it will install the dependencies
     sudo apt-get -f install
 }
+
+function SOURCE_FINALIZE {
+    mkdir -p $USER_CONFIG_FOLDER/$SOURCE_NAME/
+    cd $USER_CONFIG_FOLDER/$SOURCE_NAME/
+
+	mkdir -p $HOME/.config/Code/User
+    touch $HOME/.config/Code/User/settings.json
+    if [ ! -f settings.json ]; then
+        cp $HOME/.config/Code/User/settings.json .
+    fi
+
+    rm $HOME/.config/Code/User/settings.json
+    ln -s $USER_CONFIG_FOLDER/$SOURCE_NAME/settings.json $HOME/.config/Code/User/settings.json
+}
+
