@@ -1,0 +1,12 @@
+
+function SOURCE_GET_TEST_CMD {
+    which mysqld &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`mysqld --version | cut -d " " -f4`
+}
+
+function SOURCE_INSTALL {
+    sudo apt-get -y install mysql-server
+}
