@@ -1,0 +1,22 @@
+
+function SOURCE_GET_TEST_CMD {
+    which ngrok &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    SOURCE_VERSION=`ngrok --version | cut -d ' ' -f3`
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME
+
+    if [ ! -f "ngrok-stable-linux-amd64.zip" ]; then
+        wget -O "ngrok-stable-linux-amd64.zip" "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip"
+    fi
+
+    rm -f ngrok
+    unzip ngrok-stable-linux-amd64.zip
+
+    ln -s $USER_WORKING_FOLDER/$SOURCE_NAME/ngrok $USER_BIN_FOLDER/ngrok
+}
