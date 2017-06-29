@@ -1,5 +1,5 @@
 
-LATEST_VERSION=11.0.57095
+LATEST_VERSION=12.0.76279
 
 function SOURCE_GET_TEST_CMD {
     which teamviewer &> /dev/null || return 1
@@ -26,7 +26,7 @@ function SOURCE_INSTALL {
     sudo dpkg -i libpng12-0_1.2.50-2+deb8u2_i386.deb
 
     if [ ! -f "teamviewer-$LATEST_VERSION.deb" ]; then
-        wget -O "teamviewer-$LATEST_VERSION.deb" "https://download.teamviewer.com/download/teamviewer_i386.deb"
+        wget -O "teamviewer-$LATEST_VERSION.deb" "https://dl.tvcdn.de/download/version_12x/teamviewer_12.0.76279_i386.deb"
     fi
 
     sudo dpkg -i "teamviewer-$LATEST_VERSION.deb"
