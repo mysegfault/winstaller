@@ -1,5 +1,5 @@
 
-LATEST_VERSION=1.16.0
+LATEST_VERSION=1.20.1
 
 function SOURCE_GET_TEST_CMD {
     which code &> /dev/null || return 1
@@ -20,7 +20,7 @@ function SOURCE_INSTALL {
     cd $USER_WORKING_FOLDER/$SOURCE_NAME
 
     if [ ! -f "vscode-amd64-$LATEST_VERSION.deb" ]; then
-        wget -O "vscode-amd64-$LATEST_VERSION.deb" "https://az764295.vo.msecnd.net/stable/787b31c0474e6165390b5a5989c9619e3e16f953/code_1.16.0-1504714880_amd64.deb"
+        wget -O "vscode-amd64-$LATEST_VERSION.deb" "https://az764295.vo.msecnd.net/stable/f88bbf9137d24d36d968ea6b2911786bfe103002/code_1.20.1-1518535978_amd64.deb"
     fi
 
     sudo dpkg -i "vscode-amd64-$LATEST_VERSION.deb"
