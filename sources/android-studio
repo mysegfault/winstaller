@@ -1,0 +1,22 @@
+
+function SOURCE_GET_TEST_CMD {
+    which android-studio &> /dev/null
+}
+
+function SOURCE_GET_VERSION {
+    # could not get android-studio version
+    SOURCE_VERSION="?"
+}
+
+function SOURCE_INSTALL {
+    mkdir -p $USER_WORKING_FOLDER/$SOURCE_NAME/
+    cd $USER_WORKING_FOLDER/$SOURCE_NAME/
+
+    if [ ! -f android-studio-ide-171.4443003-linux.zip ]; then
+        wget https://dl.google.com/dl/android/studio/ide-zips/3.0.1.0/android-studio-ide-171.4443003-linux.zip
+        rm -rf android-studio
+        tar xzf android-sdk_r24.4.1-linux.tgz
+    fi
+
+    ln -fs $USER_WORKING_FOLDER/$SOURCE_NAME/android-studio/bin/studio.sh $USER_BIN_FOLDER/android-studio
+}
